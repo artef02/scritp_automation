@@ -17,7 +17,7 @@ nombre_conversation = df['data_closed_at'].eq(date).sum()
 nombre_conversation_inf_10800 = df.query('on_time_list <= 10800 and data_closed_at == @date').shape[0]
 OnTime = f"{(nombre_conversation_inf_10800 / nombre_conversation * 100):.2f}%"
 back_log = df.query('on_time_list > 10800 and data_closed_at == @date')['on_time_list'].mean()
-back_log = (back_log - 10800) / 10800 if pd.notna(back_log) else 0
+back_log = (back_log - 10800) / 3600 if pd.notna(back_log) else 0
 
 style = "<style>.result {text-transform:uppercase;color:rgb(255,102,0);font-weight:bold;text-align:center;padding:20px;font-size:20px;margin:auto;border:2px solid}</style>"
 display(HTML(style + f"<div class='result'><span>On Time: </span>{OnTime}</div>"))
